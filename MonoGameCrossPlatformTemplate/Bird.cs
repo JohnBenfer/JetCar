@@ -25,7 +25,7 @@ namespace MonoGameWindowsStarter
 
         public Bird(Game1 game)
         {
-            birdSpeed = 0.5;
+            birdSpeed = 0.8;
             width = 150;
             height = 150;
             LoadContent(game.Content);

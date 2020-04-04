@@ -145,7 +145,7 @@ namespace MonoGameWindowsStarter
             cloudX = 0;
             sunX = 0;
 
-            backgroundSpeed = 4;
+            backgroundSpeed = 5;
             gas = 100;
 
 
@@ -163,8 +163,11 @@ namespace MonoGameWindowsStarter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ScoreFont = Content.Load<SpriteFont>("File");
             BigScoreFont = Content.Load<SpriteFont>("BigScoreFont");
-            background1 = Content.Load<Texture2D>("BackgroundBack");
+            background1 = Content.Load<Texture2D>("sky");
             background2 = Content.Load<Texture2D>("BackgroundFront");
+            cloudBackground = Content.Load<Texture2D>("cloud");
+            sunBackground = Content.Load<Texture2D>("sun");
+            
             coinTexture = Content.Load<Texture2D>("Coin");
             gasTexture = Content.Load<Texture2D>("Gas");
             play = Content.Load<Texture2D>("Play");
@@ -201,19 +204,19 @@ namespace MonoGameWindowsStarter
             {
                 backgroundX = 0;
             }
-            backgroundX -= backgroundSpeed;
+            backgroundX -= backgroundSpeed-2;
 
             if (cloudX < -SCREEN_WIDTH)
             {
                 cloudX = 0;
             }
-            cloudX -= backgroundSpeed + 2;
+            cloudX -= backgroundSpeed - 3.5;
 
             if (sunX < -SCREEN_WIDTH)
             {
                 sunX = 0;
             }
-            sunX -= backgroundSpeed - 1;
+            sunX -= backgroundSpeed - 4.5;
 
 
             if (!gamePaused && !gameStart && !gameOver && !gameUpgradeMenu)
@@ -918,9 +921,14 @@ namespace MonoGameWindowsStarter
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(background1, new Rectangle(new Point(0, 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
+            spriteBatch.Draw(sunBackground, new Rectangle(new Point((int)(sunX), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
+            spriteBatch.Draw(sunBackground, new Rectangle(new Point((int)(sunX + SCREEN_WIDTH), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
+            spriteBatch.Draw(cloudBackground, new Rectangle(new Point((int)(cloudX), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
+            spriteBatch.Draw(cloudBackground, new Rectangle(new Point((int)(cloudX + SCREEN_WIDTH), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
+            
             spriteBatch.Draw(background2, new Rectangle(new Point((int)(backgroundX), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
             spriteBatch.Draw(background2, new Rectangle(new Point((int)(backgroundX + SCREEN_WIDTH), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
-            spriteBatch.Draw(cloudBackground, new Rectangle(new Point((int)(backgroundX), 0), new Point(SCREEN_WIDTH, SCREEN_HEIGHT)), Color.White);
+            
 
 
             spriteBatch.DrawString(ScoreFont, (int)score + "m", new Vector2((float)(SCREEN_WIDTH - 160), (float)(20)), Color.Black);
